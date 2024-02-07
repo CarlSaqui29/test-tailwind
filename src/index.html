@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600&display=swap" rel="stylesheet">
   <!-- fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
   <style>
     .card {min-height: fit-content;}
     .card-active, .card:hover {
@@ -27,6 +28,37 @@
     .icon-q {
       transform: translateX(5px);
       margin-top: 3px;
+    }
+
+    #dropdown {
+      box-shadow: none;
+      max-width: 600px;
+      width: 100%;
+    }
+    .datepicker-picker {
+      box-shadow: none;
+      padding: 0 !important;
+      width: 100%;
+    }
+    .datepicker-grid {
+      max-width: 600px !important;
+      width: 100% !important;
+    }
+    .days {
+      width: 100%;
+    }
+    .datepicker-header, .datepicker-header button, .datepicker-header svg {
+      background-color: #0a0a0a !important;
+      color: #fff;
+      fill: #fff;
+    }
+    .dow {
+      color:#ff0000;
+    }
+    @media (max-width: 646px) {
+      #dropdown {
+        width: 80%;
+      }
     }
   </style>
 </head>
@@ -65,7 +97,111 @@
         </div>
       </div>
     </div>
+     <div class="py-10 mx-auto max-w-3xl px-6 lg:px-8">
+      <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Date and time<span class="text-rose-600">*</span></h2>
+      <p class="mt-1 text-base text-gray-600 flex items-center"><input type="checkbox" name="" id="" checked class="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600 mr-3">Publish ASAP <svg class="ml-1 w-4 h-4 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.6-8.5h0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+  </svg></p>
+
+      <p class="text-gray-400 mt-5 mb-3">Publication date:</p>
+      <button id="dropdownDefaultButton" onclick="changeDate()" data-dropdown-toggle="dropdown" class="text-gray-400 border border-gray-400 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center w-full inline-flex justify-between items-center" type="button">
+          <div class="left inline-flex">
+            <svg class="w-4 h-4 text-gray-400 dark:text-gray-400 mr-10" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20"><path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/></svg>&nbsp;&nbsp;Select release date <span class="text-rose-600">*</span>
+          </div>
+          
+          <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/></svg>
+        </button>
+
+        <!-- Dropdown menu -->
+        <div id="dropdown" class="z-10 hidden bg-white divide-y border border-gray-400  divide-gray-400 shadow w-44 dark:bg-gray-700">
+          <div onchange="changeDate()" inline-datepicker data-date="02/07/2024" class="rounded-lg" id="datepicker"></div>
+          <div class="p-4 flex space-x-4">
+              <div class="option1 w-full">
+                <label for="countries" class="block mb-2 text-xs font-bold text-gray-900 dark:text-white">Publication Time</label>
+                <select onchange="changeDate()" id="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>09:00 AM</option>
+                  <option>09:30 AM</option>
+                  <option>10:00 AM</option>
+                  <option>10:30 AM</option>
+                  <option>11:00 AM</option>
+                  <option>11:30 AM</option>
+                  <option>12:00 PM</option>
+                  <option>12:30 PM</option>
+                  <option>01:00 PM</option>
+                  <option>01:30 PM</option>
+                  <option>02:00 PM</option>
+                  <option>02:30 PM</option>
+                  <option>03:00 PM</option>
+                  <option>03:30 PM</option>
+                  <option>04:00 PM</option>
+                  <option>04:30 PM</option>
+                  <option>05:00 PM</option>
+                </select>
+              </div>
+              <div class="option1 w-full">
+                <label for="countries" class="block mb-2 text-xs font-bold text-gray-900 dark:text-white">Publication Timezone</label>
+                <select onchange="changeDate()" id="time_zone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option selected>EST</option>
+                  <option>UTC</option>
+                </select>
+              </div>
+          </div>
+        </div>
+      </div>
   </div>
+      
   <p class="text-md text-gray-300 text-center">Made with <i class="fa-solid fa-heart"></i> by Carl Saqui.</p>
+
+
+  <script>
+
+    function changeDate() {
+      let date = ""
+      const selectedCells = document.querySelectorAll('.datepicker-cell.selected');
+      selectedCells.forEach(cell => {
+          // Get the value of the 'date' attribute of each selected cell
+          const dateAttributeValue = cell.getAttribute('data-date');
+          console.log("Date attribute value:", dateAttributeValue);
+          date = convertUnixTimestamp(parseInt(dateAttributeValue))
+      });
+      const time_element = document.getElementById('time');
+      let tvalue = time_element.value;
+      const time_zone = document.getElementById('time_zone');
+      let tzvalue = time_zone.value;
+
+      let final_val = `${date} ${tvalue} ${tzvalue}`;
+
+      console.log(final_val)
+
+      // set the button text
+      const dropdownButton = document.getElementById('dropdownDefaultButton');
+
+      // Set the text content for the element
+      dropdownButton.textContent = final_val;
+    }
+
+    function convertUnixTimestamp(timestamp) {
+        // Create a new Date object using the timestamp
+        const date = new Date(timestamp);
+
+        // Get month, day, and year components
+        const month = date.getMonth() + 1; // Month is zero-indexed, so we add 1
+        const day = date.getDate();
+        const year = date.getFullYear();
+
+        // Format month, day, and year with leading zeros if necessary
+        const formattedMonth = month < 10 ? '0' + month : month;
+        const formattedDay = day < 10 ? '0' + day : day;
+
+        // Concatenate the components into the desired format
+        const formattedDate = `${formattedMonth}/${formattedDay}/${year}`;
+
+        return formattedDate;
+    }
+    
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 </body>
 </html>
